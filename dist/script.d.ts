@@ -19,6 +19,7 @@ declare class TicTacToeGame {
     private gameState;
     private winningCombination;
     private config;
+    private moveCount;
     constructor(config: GameConfig);
     makeMove(index: number): GameResult;
     private checkGameState;
@@ -27,6 +28,7 @@ declare class TicTacToeGame {
     private isBoardFull;
     getGameResult(): GameResult;
     reset(): void;
+    getMoveCount(): number;
     getCurrentPlayer(): Player;
     getBoard(): Player[];
 }
@@ -36,6 +38,7 @@ declare class GameUI {
     private statusElement;
     private resetButton;
     private cells;
+    private moveCounterElement;
     constructor();
     private initializeElements;
     private setupEventListeners;
