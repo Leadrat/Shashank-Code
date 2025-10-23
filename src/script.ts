@@ -23,6 +23,7 @@ class TicTacToeGame {
   private gameState: GameState;
   private winningCombination: WinningCombination;
   private config: GameConfig;
+  private moveCount: number;
 
   constructor(config: GameConfig) {
     this.config = config;
@@ -30,6 +31,7 @@ class TicTacToeGame {
     this.currentPlayer = 'X';
     this.gameState = 'playing';
     this.winningCombination = null;
+    this.moveCount = 0;
   }
 
   // Make a move on the board
@@ -39,6 +41,7 @@ class TicTacToeGame {
     }
 
     this.board[index] = this.currentPlayer;
+    this.moveCount++;
     const result = this.checkGameState();
     
     if (result.gameState === 'playing') {
@@ -136,6 +139,12 @@ class TicTacToeGame {
     this.currentPlayer = 'X';
     this.gameState = 'playing';
     this.winningCombination = null;
+    this.moveCount = 0;
+  }
+
+  // Get move count
+  public getMoveCount(): number {
+    return this.moveCount;
   }
 
   // Get current player
@@ -156,6 +165,7 @@ class GameUI {
   private statusElement!: HTMLElement;
   private resetButton!: HTMLElement;
   private cells!: HTMLElement[];
+  private moveCounterElement!: HTMLElement;
 
   constructor() {
     this.game = new TicTacToeGame({
@@ -175,6 +185,7 @@ class GameUI {
     this.boardElement = document.getElementById('game-board')!;
     this.statusElement = document.getElementById('game-status')!;
     this.resetButton = document.getElementById('reset-button')!;
+    this.moveCounterElement = document.getElementById('move-counter')!;
     this.cells = Array.from(document.querySelectorAll('.cell')) as HTMLElement[];
   }
 
@@ -200,12 +211,16 @@ class GameUI {
     const board = this.game.getBoard();
     const currentPlayer = this.game.getCurrentPlayer();
     const result = this.game.getGameResult();
+    const moveCount = this.game.getMoveCount();
 
     // Update board cells
     this.cells.forEach((cell, index) => {
       cell.textContent = board[index] || '';
       cell.classList.remove('winning-cell');
     });
+
+    // Update move counter
+    this.moveCounterElement.textContent = `Moves: ${moveCount}`;
 
     // Update status message
     if (result.gameState === 'won') {
