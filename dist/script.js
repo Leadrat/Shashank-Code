@@ -6,6 +6,7 @@ class TicTacToeGame {
         this.currentPlayer = 'X';
         this.gameState = 'playing';
         this.winningCombination = null;
+        this.moveCount = 0;
     }
     // Make a move on the board
     makeMove(index) {
@@ -13,6 +14,7 @@ class TicTacToeGame {
             return this.getGameResult();
         }
         this.board[index] = this.currentPlayer;
+        this.moveCount++;
         const result = this.checkGameState();
         if (result.gameState === 'playing') {
             this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
@@ -95,6 +97,11 @@ class TicTacToeGame {
         this.currentPlayer = 'X';
         this.gameState = 'playing';
         this.winningCombination = null;
+        this.moveCount = 0;
+    }
+    // Get move count
+    getMoveCount() {
+        return this.moveCount;
     }
     // Get current player
     getCurrentPlayer() {
@@ -123,6 +130,7 @@ class GameUI {
         this.boardElement = document.getElementById('game-board');
         this.statusElement = document.getElementById('game-status');
         this.resetButton = document.getElementById('reset-button');
+        this.moveCounterElement = document.getElementById('move-counter');
         this.cells = Array.from(document.querySelectorAll('.cell'));
     }
     setupEventListeners() {
@@ -143,11 +151,14 @@ class GameUI {
         const board = this.game.getBoard();
         const currentPlayer = this.game.getCurrentPlayer();
         const result = this.game.getGameResult();
+        const moveCount = this.game.getMoveCount();
         // Update board cells
         this.cells.forEach((cell, index) => {
             cell.textContent = board[index] || '';
             cell.classList.remove('winning-cell');
         });
+        // Update move counter
+        this.moveCounterElement.textContent = `Moves: ${moveCount}`;
         // Update status message
         if (result.gameState === 'won') {
             this.statusElement.textContent = `Player ${result.winner} wins!`;
