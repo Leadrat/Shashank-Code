@@ -7,7 +7,7 @@ import { GameLobby } from "./components/GameLobby";
 import { useState } from "react";
 
 export default function App() {
-  return (
+  return (    
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100">
       <header className="sticky top-0 z-10 bg-white/90 backdrop-blur-sm h-16 flex justify-between items-center border-b border-blue-200 shadow-sm px-4">
         <h2 className="text-2xl font-bold text-blue-600">Tic-Tac-Toe</h2>
