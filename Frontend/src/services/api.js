@@ -106,7 +106,8 @@ export const gameAPI = {
 
 // Score API endpoints
 export const scoreAPI = {
-  getUserScore: (userId) => api.get(`/score/user/${userId || ''}`),
+  // Backend route is GET /api/score/user (no parameter)
+  getUserScore: () => api.get('/score/user'),
   getLeaderboard: (limit = 10) => api.get('/score/leaderboard', { params: { limit } }),
   getScoreHistory: (userId, page = 1, limit = 10) => 
     api.get(`/score/history/${userId || ''}`, { params: { page, limit } }),

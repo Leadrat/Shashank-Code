@@ -15,7 +15,7 @@ const ScoreboardPage = () => {
   const fetchScore = async () => {
     try {
       const response = await scoreAPI.getUserScore()
-      setScore(response.data)
+      setScore(response)
     } catch (error) {
       console.error('Failed to fetch score:', error)
     } finally {
