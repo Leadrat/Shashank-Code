@@ -3,11 +3,16 @@ type Player = 'X' | 'O' | null;
 type GameState = 'playing' | 'won' | 'draw';
 type WinningCombination = number[] | null;
 
+interface PlayerInfo {
+  name: string;
+  score: number;
+}
+
 interface GameConfig {
   boardSize: number;
   players: {
-    X: string;
-    O: string;
+    X: PlayerInfo;
+    O: PlayerInfo;
   };
 }
 
@@ -15,6 +20,7 @@ interface GameResult {
   winner: Player;
   winningCombination: WinningCombination;
   gameState: GameState;
+  winnerName?: string;
 }
 
 class TicTacToeGame {
@@ -26,12 +32,31 @@ class TicTacToeGame {
   private moveCount: number;
 
   constructor(config: GameConfig) {
-    this.config = config;
+    this.config = {
+      boardSize: config.boardSize,
+      players: {
+        X: { name: config.players.X.name, score: 0 },
+        O: { name: config.players.O.name, score: 0 }
+      }
+    };
     this.board = new Array(config.boardSize * config.boardSize).fill(null);
     this.currentPlayer = 'X';
     this.gameState = 'playing';
     this.winningCombination = null;
     this.moveCount = 0;
+    this.updateScoreDisplay();
+  }
+
+  private updateScoreDisplay(): void {
+    const playerXName = document.getElementById('player-x-name');
+    const playerOName = document.getElementById('player-o-name');
+    const playerXScore = document.getElementById('player-x-score');
+    const playerOScore = document.getElementById('player-o-score');
+
+    if (playerXName) playerXName.textContent = this.config.players.X.name;
+    if (playerOName) playerOName.textContent = this.config.players.O.name;
+    if (playerXScore) playerXScore.textContent = this.config.players.X.score.toString();
+    if (playerOScore) playerOScore.textContent = this.config.players.O.score.toString();
   }
 
   // Make a move on the board
@@ -44,11 +69,17 @@ class TicTacToeGame {
     this.moveCount++;
     const result = this.checkGameState();
     
-    if (result.gameState === 'playing') {
+    if (result.gameState === 'won') {
+      // Update score for winning player
+      if (this.currentPlayer === 'X' || this.currentPlayer === 'O') {
+        this.config.players[this.currentPlayer].score++;
+        this.updateScoreDisplay();
+      }
+    } else if (result.gameState === 'playing') {
       this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
     }
 
-    return result;
+    return this.getGameResult();
   }
 
   // Check if the game is won, drawn, or still playing
@@ -58,10 +89,17 @@ class TicTacToeGame {
     if (winningCombination) {
       this.gameState = 'won';
       this.winningCombination = winningCombination;
+      const winnerName = this.currentPlayer === 'X' ? 
+        this.config.players.X.name : 
+        this.currentPlayer === 'O' ? 
+        this.config.players.O.name : 
+        undefined;
+      
       return {
         winner: this.currentPlayer,
         winningCombination,
-        gameState: 'won'
+        gameState: 'won',
+        winnerName
       };
     }
 
@@ -147,6 +185,10 @@ class TicTacToeGame {
     return this.moveCount;
   }
 
+  public getConfig(): GameConfig {
+    return this.config;
+  }
+
   // Get current player
   public getCurrentPlayer(): Player {
     return this.currentPlayer;
@@ -160,25 +202,50 @@ class TicTacToeGame {
 
 // UI Controller class
 class GameUI {
-  private game: TicTacToeGame;
+  private game!: TicTacToeGame;
   private boardElement!: HTMLElement;
   private statusElement!: HTMLElement;
   private resetButton!: HTMLElement;
   private cells!: HTMLElement[];
   private moveCounterElement!: HTMLElement;
+  private playerForm!: HTMLFormElement;
+  private gameBoard!: HTMLElement;
+  private scoreBoard!: HTMLElement;
 
   constructor() {
-    this.game = new TicTacToeGame({
-      boardSize: 3,
-      players: {
-        X: 'X',
-        O: 'O'
-      }
-    });
-
     this.initializeElements();
-    this.setupEventListeners();
-    this.render();
+    this.setupPlayerForm();
+    // Game will be initialized when player form is submitted
+  }
+
+  private setupPlayerForm(): void {
+    this.playerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const playerXName = (document.getElementById('player-x') as HTMLInputElement).value || 'Player X';
+      const playerOName = (document.getElementById('player-o') as HTMLInputElement).value || 'Player O';
+
+      this.game = new TicTacToeGame({
+        boardSize: 3,
+        players: {
+          X: { name: playerXName, score: 0 },
+          O: { name: playerOName, score: 0 }
+        }
+      });
+
+      this.playerForm.style.display = 'none';
+      this.gameBoard.style.display = 'grid';
+      this.scoreBoard.style.display = 'flex';
+
+      // Smooth scroll to game section
+      const gameSection = document.getElementById('game-section');
+      if (gameSection) {
+        gameSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      this.setupEventListeners();
+      this.render();
+    });
   }
 
   private initializeElements(): void {
@@ -187,6 +254,13 @@ class GameUI {
     this.resetButton = document.getElementById('reset-button')!;
     this.moveCounterElement = document.getElementById('move-counter')!;
     this.cells = Array.from(document.querySelectorAll('.cell')) as HTMLElement[];
+    this.playerForm = document.getElementById('player-names-form') as HTMLFormElement;
+    this.gameBoard = document.getElementById('game-board')!;
+    this.scoreBoard = document.getElementById('score-board')!;
+
+    // Initially hide game board and score board
+    this.gameBoard.style.display = 'none';
+    this.scoreBoard.style.display = 'none';
   }
 
   private setupEventListeners(): void {
@@ -224,13 +298,19 @@ class GameUI {
 
     // Update status message
     if (result.gameState === 'won') {
-      this.statusElement.textContent = `Player ${result.winner} wins!`;
+      const winnerName = currentPlayer === 'X' ? 
+        this.game.getConfig().players.X.name : 
+        this.game.getConfig().players.O.name;
+      this.statusElement.textContent = `${winnerName} wins!`;
       this.statusElement.className = 'status-message win-message';
     } else if (result.gameState === 'draw') {
       this.statusElement.textContent = "It's a draw!";
       this.statusElement.className = 'status-message draw-message';
     } else {
-      this.statusElement.textContent = `Player ${currentPlayer}'s turn`;
+      const currentPlayerName = currentPlayer === 'X' ? 
+        this.game.getConfig().players.X.name : 
+        this.game.getConfig().players.O.name;
+      this.statusElement.textContent = `${currentPlayerName}'s turn`;
       this.statusElement.className = 'status-message playing-message';
     }
   }
