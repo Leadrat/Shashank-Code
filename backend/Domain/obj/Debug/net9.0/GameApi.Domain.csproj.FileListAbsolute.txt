@@ -1,0 +1,11 @@
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\bin\Debug\net9.0\GameApi.Domain.deps.json
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\bin\Debug\net9.0\GameApi.Domain.dll
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\bin\Debug\net9.0\GameApi.Domain.pdb
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\obj\Debug\net9.0\GameApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\obj\Debug\net9.0\GameApi.Domain.AssemblyInfoInputs.cache
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\obj\Debug\net9.0\GameApi.Domain.AssemblyInfo.cs
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\obj\Debug\net9.0\GameApi.Domain.csproj.CoreCompileInputs.cache
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\obj\Debug\net9.0\GameApi.Domain.dll
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\obj\Debug\net9.0\refint\GameApi.Domain.dll
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\obj\Debug\net9.0\GameApi.Domain.pdb
+C:\Users\shash\Desktop\Flutter-Game\backend\Domain\obj\Debug\net9.0\ref\GameApi.Domain.dll

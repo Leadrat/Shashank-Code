@@ -1,46 +1,16 @@
-# Frontend React Application
+# frontend
+
+A new Flutter project.
 
 ## Getting Started
 
-```bash
-cd Frontend
-npm install
-npm run dev
-```
+This project is a starting point for a Flutter application.
 
-The app will be available at: `http://localhost:5173`
+A few resources to get you started if this is your first Flutter project:
 
-## Technologies Used
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-- **React 18**: UI framework
-- **Vite**: Build tool and dev server
-- **React Router**: Navigation
-- **Axios**: HTTP client
-- **Tailwind CSS**: Styling
-
-## Project Structure
-
-```
-src/
-├── components/       # Reusable components (LoadingSpinner, Toast)
-├── pages/           # Page components
-│   ├── LandingPage.jsx
-│   ├── LoginPage.jsx
-│   ├── GamePage.jsx
-│   ├── ScoreboardPage.jsx
-│   └── AdminPanel.jsx
-├── services/        # API integration
-│   └── api.js       # API client configuration
-├── App.jsx          # Main app component with routing
-└── main.jsx         # Entry point
-```
-
-## Available Scripts
-
-- `npm run dev`: Start development server
-- `npm run build`: Build for production
-- `npm run preview`: Preview production build
-
-## Configuration
-
-Update API endpoint in `src/services/api.js` if backend runs on different port.
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
