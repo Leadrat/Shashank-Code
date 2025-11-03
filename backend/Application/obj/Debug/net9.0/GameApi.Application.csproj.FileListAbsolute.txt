@@ -1,0 +1,15 @@
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\bin\Debug\net9.0\GameApi.Application.deps.json
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\bin\Debug\net9.0\GameApi.Application.dll
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\bin\Debug\net9.0\GameApi.Application.pdb
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\bin\Debug\net9.0\GameApi.Domain.dll
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\bin\Debug\net9.0\GameApi.Domain.pdb
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\obj\Debug\net9.0\GameApi.Application.csproj.AssemblyReference.cache
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\obj\Debug\net9.0\GameApi.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\obj\Debug\net9.0\GameApi.Application.AssemblyInfoInputs.cache
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\obj\Debug\net9.0\GameApi.Application.AssemblyInfo.cs
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\obj\Debug\net9.0\GameApi.Application.csproj.CoreCompileInputs.cache
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\obj\Debug\net9.0\GameApi..C27CEA5E.Up2Date
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\obj\Debug\net9.0\GameApi.Application.dll
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\obj\Debug\net9.0\refint\GameApi.Application.dll
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\obj\Debug\net9.0\GameApi.Application.pdb
+C:\Users\shash\Desktop\Flutter-Game\backend\Application\obj\Debug\net9.0\ref\GameApi.Application.dll
